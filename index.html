@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>To Do List</title>
@@ -8,15 +9,28 @@
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<h1>To Do Items</h1>
-<form>
-    <input type="text" id="toDoItem">
-    <input type="submit" id="addItem" value="Add Item">
-</form>
-<ul id="toDoList">
 
-</ul>
-<script src="js/scripts.js"></script>
-</body>
+<div class="container">
+    <body>
+    <div class="row">
+        <h1 class="col-xs-8 col-xs-offset-2">To Do Items</h1>
+    </div>
+
+    <div class="row">
+        <form>
+            <input class="col-xs-5 col-xs-offset-2" type="text" id="toDoItem">
+            <input class="col-xs-3" type="submit" id="addItem" value="Add Item">
+        </form>
+    </div>
+
+    <div class="container">
+        <ul class="list-group row" id="toDoList">
+
+        </ul>
+    </div>
+
+    <script src="js/scripts.js"></script>
+    </body>
+</div>
+
 </html>
