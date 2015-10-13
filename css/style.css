@@ -1,4 +1,4 @@
-.left-checkbox {
-    margin-left: 0;
-    margin-right: auto;
+li{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
