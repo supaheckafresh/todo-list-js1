@@ -6,12 +6,17 @@ var toDoItems = [];
 
 var addItem_button = document.getElementById('addItem');
 
+//TODO remove debug console logs
+
 addItem_button.addEventListener('click', function (evt) {
     toDoItems.push(itemText_input.value);
+
     evt.preventDefault();
 
     console.log(toDoItems);
+
     displayToDoItems();
+    alert(itemText_input.value + " has been added to your list!");
 });
 
 function displayToDoItems() {
