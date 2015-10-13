@@ -9,16 +9,20 @@ var addItem_button = document.getElementById('addItem');
 //TODO remove debug console logs
 
 addItem_button.addEventListener('click', function (evt) {
-    toDoItems.push(itemText_input.value);
+    if (itemText_input.value) {
+        toDoItems.push(itemText_input.value);
 
-    evt.preventDefault();
+        evt.preventDefault();
 
-    console.log(toDoItems);
+        console.log(toDoItems);
 
-    displayToDoItems();
-    alert(itemText_input.value + " has been added to your list!");
+        displayToDoItems();
+        alert(itemText_input.value + ' has been added to your list!');
 
-    itemText_input.value = '';
+        itemText_input.value = '';
+    } else {
+        evt.preventDefault();
+    }
 });
 
 function displayToDoItems() {
