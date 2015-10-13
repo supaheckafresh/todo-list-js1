@@ -1,10 +1,10 @@
 
-var itemText_input = document.getElementById('toDoItem');
+var itemText_input = document.getElementById('enterItem');
 var toDoList_ul = document.getElementById('toDoList');
 
 var toDoItems = [];
 
-var addItem_button = document.getElementById('addItem');
+var addItem_button = document.getElementById('itemSubmit');
 
 //TODO remove debug console logs
 
@@ -39,6 +39,7 @@ function displayToDoItems() {
 
 function displayItem(item) {
     var div = document.createElement('div');
+    div.setAttribute('class', 'to-do-item');
 
     var li = document.createElement('li');
     li.innerText = item;
