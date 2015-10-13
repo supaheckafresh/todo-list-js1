@@ -17,6 +17,8 @@ addItem_button.addEventListener('click', function (evt) {
 
     displayToDoItems();
     alert(itemText_input.value + " has been added to your list!");
+
+    itemText_input.value = '';
 });
 
 function displayToDoItems() {
