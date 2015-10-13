@@ -8,6 +8,10 @@ var addItem_button = document.getElementById('addItem');
 
 //TODO remove debug console logs
 
+//TODO add edit, delete, and complete for selected tasks
+
+//TODO also need edit and delete next to each item
+
 addItem_button.addEventListener('click', function (evt) {
     if (itemText_input.value) {
         toDoItems.push(itemText_input.value);
@@ -29,16 +33,22 @@ function displayToDoItems() {
     toDoList_ul.innerHTML = '';
     for (var i = 0; i < toDoItems.length; i++) {
         var item = toDoItems[i];
-
-        var li = document.createElement('li');
-        li.innerText = item;
-        li.setAttribute('class', 'list-group-item col-xs-8');
-
-        var checkBox = document.createElement('input');
-        checkBox.setAttribute('type', 'checkbox');
-        checkBox.setAttribute('class', 'col-xs-1');
-
-        toDoList_ul.appendChild(li);
-        toDoList_ul.appendChild(checkBox);
+        displayItem(item);
     }
 }
+
+function displayItem(item) {
+    var li = document.createElement('li');
+    li.innerText = item;
+    li.setAttribute('class', 'list-group-item col-xs-8');
+
+    toDoList_ul.appendChild(li);
+    toDoList_ul.appendChild(displayItem.itemCheckbox());
+}
+
+displayItem.itemCheckbox = function() {
+    var checkBox = document.createElement('input');
+    checkBox.setAttribute('type', 'checkbox');
+    checkBox.setAttribute('class', 'col-xs-1');
+    return checkBox;
+};
