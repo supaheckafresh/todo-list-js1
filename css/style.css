@@ -1,3 +1,7 @@
+.container{
+    min-width: 300px;
+}
+
 li{
     overflow: hidden;
     text-overflow: ellipsis;

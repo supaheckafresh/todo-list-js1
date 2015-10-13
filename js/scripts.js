@@ -38,17 +38,36 @@ function displayToDoItems() {
 }
 
 function displayItem(item) {
+    var div = document.createElement('div');
+
     var li = document.createElement('li');
     li.innerText = item;
-    li.setAttribute('class', 'list-group-item col-xs-8');
+    li.setAttribute('class', 'list-group-item col-xs-7');
 
-    toDoList_ul.appendChild(li);
-    toDoList_ul.appendChild(displayItem.itemCheckbox());
+    div.appendChild(li);
+    div.appendChild(displayItem.checkbox());
+    div.appendChild(displayItem.button('glyphicon glyphicon-edit'));
+    div.appendChild(displayItem.button('glyphicon glyphicon-trash'));
+
+    toDoList_ul.appendChild(div);
 }
 
-displayItem.itemCheckbox = function() {
+displayItem.checkbox = function() {
     var checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('class', 'col-xs-1');
     return checkBox;
+};
+
+displayItem.button = function(buttonType) {
+    var btn = document.createElement('button');
+
+    var span = document.createElement('span');
+    span.setAttribute('class', buttonType);
+    span.setAttribute('aria-hidden', 'true');
+    btn.appendChild(span);
+
+    btn.setAttribute('type', 'button');
+    btn.setAttribute('class', 'btn btn-default btn-md col-xs-1');
+    return btn;
 };
