@@ -12,20 +12,23 @@
 
 
 <body>
-    <div class="container">
+    <div class="container ">
         <div class="row">
             <h1>To Do List</h1>
             <br/>
         </div>
 
         <div class="row">
-            <form>
-                <input class="col-xs-7" type="text" id="enterItem">
-                <input class="col-xs-3" type="submit" id="itemSubmit" value="Add Item">
+            <form role="form" class="col-xs-7">
+                <div class="form-group">
+                    <label for="enterItem">To Do:</label>
+                    <input class="form-control input-normal" type="text" id="enterItem"/>
+                    <input class="btn btn-primary" type="submit" id="itemSubmit" value="Add Item"/>
+                </div>
             </form>
         </div>
 
-        <div class="spacer">
+        <div class="spacer row">
             <br/>
         </div>
 

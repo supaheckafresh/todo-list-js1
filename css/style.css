@@ -1,8 +1,14 @@
-.container{
+.container {
     min-width: 300px;
+    background-color: #e4b9b9;
+    padding-left: 10%;
 }
 
-li{
+ul {
+    min-height: 60vh;
+}
+
+li {
     overflow: hidden;
     text-overflow: ellipsis;
 }

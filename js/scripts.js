@@ -43,7 +43,7 @@ function displayItem(item) {
 
     var li = document.createElement('li');
     li.innerText = item;
-    li.setAttribute('class', 'list-group-item col-xs-7');
+    li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7');
 
     div.appendChild(li);
     div.appendChild(displayItem.checkbox());
