@@ -4,6 +4,10 @@
     padding-left: 10%;
 }
 
+.form-padding-fix {
+    padding-left: 0;
+}
+
 ul {
     min-height: 60vh;
 }
