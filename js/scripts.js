@@ -12,6 +12,8 @@ var addItem_button = document.getElementById('itemSubmit');
 
 //TODO also need edit and delete next to each item
 
+//TODO MAYBE - add theme selector?
+
 addItem_button.addEventListener('click', function (evt) {
     if (itemText_input.value) {
         toDoItems.push(itemText_input.value);
@@ -38,12 +40,16 @@ function displayToDoItems() {
 }
 
 function displayItem(item) {
+    var span = document.createElement('span');
+    span.setAttribute('class', 'item-text col-xs-10');
+    span.appendChild(document.createTextNode(item));
+
     var div = document.createElement('div');
     div.setAttribute('class', 'to-do-item');
 
     var li = document.createElement('li');
     li.appendChild(displayItem.checkbox());
-    li.appendChild(document.createTextNode(item));
+    li.appendChild(span);
     li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
 
     div.appendChild(li);

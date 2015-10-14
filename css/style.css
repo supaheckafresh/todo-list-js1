@@ -2,6 +2,10 @@
     font-family: 'Muli', sans-serif;
 }
 
+body {
+    background-color: #651fff;
+}
+
 .container {
     min-width: 300px;
     background-color: #e1bee7;
@@ -19,7 +23,9 @@ ul {
     min-height: 60vh;
 }
 
-li {
+.item-text {
+    font-size: 16px;
+    padding-top: 4px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -32,4 +38,5 @@ li {
 .big-check {
     width: 32px;
     height: 32px;
+    padding-right: 80px;
 }
