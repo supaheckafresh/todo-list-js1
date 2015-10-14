@@ -42,11 +42,11 @@ function displayItem(item) {
     div.setAttribute('class', 'to-do-item');
 
     var li = document.createElement('li');
-    li.innerText = item;
-    li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7');
+    li.appendChild(displayItem.checkbox());
+    li.appendChild(document.createTextNode(item));
+    li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
 
     div.appendChild(li);
-    div.appendChild(displayItem.checkbox());
     div.appendChild(displayItem.button('glyphicon glyphicon-edit'));
     div.appendChild(displayItem.button('glyphicon glyphicon-trash'));
 
@@ -56,7 +56,7 @@ function displayItem(item) {
 displayItem.checkbox = function() {
     var checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
-    checkBox.setAttribute('class', 'col-xs-1');
+    checkBox.setAttribute('class', 'big-check col-xs-2');
     return checkBox;
 };
 
@@ -69,6 +69,6 @@ displayItem.button = function(buttonType) {
     btn.appendChild(span);
 
     btn.setAttribute('type', 'button');
-    btn.setAttribute('class', 'btn btn-default btn-md col-xs-1');
+    btn.setAttribute('class', 'btn btn-default btn-lg col-xs-1');
     return btn;
 };

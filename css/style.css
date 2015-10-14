@@ -1,6 +1,14 @@
+* {
+    font-family: 'Muli', sans-serif;
+}
+
 .container {
     min-width: 300px;
-    background-color: #e4b9b9;
+    background-color: #e1bee7;
+}
+
+h1 {
+    padding-left: 24px;
 }
 
 .form-padding-fix {
@@ -14,4 +22,14 @@ ul {
 li {
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.list-group-item {
+    padding: 4px;
+    display: inline;
+}
+
+.big-check {
+    width: 32px;
+    height: 32px;
 }
