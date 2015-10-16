@@ -40,3 +40,7 @@ ul {
     height: 32px;
     padding-right: 80px;
 }
+
+.list-group-item-success {
+    text-decoration: line-through;
+}

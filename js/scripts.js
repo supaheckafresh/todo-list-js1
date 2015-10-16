@@ -78,3 +78,19 @@ displayItem.button = function(buttonType) {
     btn.setAttribute('class', 'btn btn-default btn-lg col-xs-1');
     return btn;
 };
+
+toDoList_ul.addEventListener('click', function (evt) {
+    if (evt.target.type === 'checkbox') {
+        var checkbox = evt.target;
+        var li = checkbox.parentNode;
+        if (checkbox.checked) {
+            var liCompleted = li;
+            liCompleted.setAttribute('class', 'list-group-item list-group-item-success col-xs-7 col-xs-offset-1');
+            liCompleted.querySelector('.item-text').style.textDecoration = 'line-through';
+        }
+        else if (!checkbox.checked) {
+            li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
+            li.querySelector('.item-text').style.textDecoration = 'none';
+        }
+    }
+});
