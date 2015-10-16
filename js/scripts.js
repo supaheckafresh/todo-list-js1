@@ -109,16 +109,57 @@ toDoList_ul.addEventListener('click', function (evt) {
     var button;
     var todoLi;
 
-    if (buttonClicked() && )
+    if (buttonClicked() && isTrashBtn(event.target)) {
+        console.log(buttonClicked(), isTrashBtn(event.target));
+        deleteToDoItem();
+    }
+
+    if (buttonClicked() && isEditBtn(event.target)) {
+        editToDoItem();
+    }
+
+
+    function buttonClicked() {
+        var clicked = false;
+
+        if (evt.target.type === 'button') {
+            button = evt.target.firstChild;
+            todoLi = evt.target.parentNode;
+            clicked = true;
+        }
+        else if (targetIsTheLittleGlyphicon()) {
+            button = evt.target;
+            todoLi = button.parentNode.parentNode;
+            clicked = true;
+        }
+
+        return clicked;
+
+        function targetIsTheLittleGlyphicon() {
+            return evt.target.parentElement.type === 'button';
+        }
+    }
+
+
+    function isTrashBtn(button) {
+        return button.classList.contains('glyphicon-trash')
+            || button.childNodes[0].classList.contains('glyphicon-trash');
+    }
 
     function deleteToDoItem() {
-        deleteItemData();
+        console.log(todoLi.textContent);
+        removeItemFromArray();
         displayToDoItems();
         console.log(toDoItems);
     }
 
-    function isTrashBtn() {
-        button && button.classList.contains('glyphicon-trash');
+    function removeItemFromArray() {
+        toDoItems.splice(toDoItems.indexOf(todoLi.textContent), 1);
+    }
+
+
+    function isEditBtn(button) {
+        return button.classList.contains('glyphicon-edit');
     }
 
     function editToDoItem() {
@@ -127,28 +168,6 @@ toDoList_ul.addEventListener('click', function (evt) {
         }
     }
 
-    function buttonClicked() {
-        var clicked = false;
-
-        if (evt.target.type === 'button') {
-            button = evt.target.firstChild;
-            todoLi = evt.target.parentNode;
-            return true;
-        }
-        else if (targetIsTheLittleGlyphicon()) {
-            button = evt.target;
-            todoLi = button.parentNode.parentNode;
-            return true;
-        }
-
-        function targetIsTheLittleGlyphicon() {
-            return evt.target.parentElement.type === 'button';
-        }
-    }
-
-    function deleteItemData() {
-        return toDoItems.splice(toDoItems.indexOf(todoLi.textContent), 1);
-    }
 
 
 });
