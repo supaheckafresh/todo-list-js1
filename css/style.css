@@ -41,6 +41,10 @@ ul {
     padding-right: 80px;
 }
 
+button {
+    z-index: 999;
+}
+
 .list-group-item-success {
     text-decoration: line-through;
 }

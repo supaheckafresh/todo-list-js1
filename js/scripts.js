@@ -16,7 +16,7 @@ var addItem_button = document.getElementById('itemSubmit');
 
 addItem_button.addEventListener('click', function (evt) {
     if (itemText_input.value) {
-        toDoItems.push(itemText_input.value);
+        toDoItems.push(itemText_input.value.trim());
 
         evt.preventDefault();
 
@@ -79,18 +79,58 @@ displayItem.button = function(buttonType) {
     return btn;
 };
 
+//TODO add short cheer sound on complete item?
+
 toDoList_ul.addEventListener('click', function (evt) {
+
     if (evt.target.type === 'checkbox') {
         var checkbox = evt.target;
         var li = checkbox.parentNode;
         if (checkbox.checked) {
-            var liCompleted = li;
-            liCompleted.setAttribute('class', 'list-group-item list-group-item-success col-xs-7 col-xs-offset-1');
-            liCompleted.querySelector('.item-text').style.textDecoration = 'line-through';
+            styleComplete();
         }
         else if (!checkbox.checked) {
-            li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
-            li.querySelector('.item-text').style.textDecoration = 'none';
+            styleIncomplete();
         }
+    }
+
+    function styleComplete() {
+        var liCompleted = li;
+        liCompleted.setAttribute('class', 'list-group-item list-group-item-success col-xs-7 col-xs-offset-1');
+        liCompleted.querySelector('.item-text').style.textDecoration = 'line-through';
+    }
+
+    function styleIncomplete() {
+        li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
+        li.querySelector('.item-text').style.textDecoration = 'none';
+    }
+
+
+    var deleteBtn;
+    var liToDelete;
+    if (evt.target.type === 'button') {
+        deleteBtn = evt.target.firstChild;
+        liToDelete = evt.target.parentNode;
+    }
+    else if (targetIsTheLittleGlyphicon()) {
+        deleteBtn = evt.target;
+        liToDelete = deleteBtn.parentNode.parentNode;
+    }
+    deleteToDoItem();
+
+    function targetIsTheLittleGlyphicon() {
+        return evt.target.parentElement.type === 'button';
+    }
+
+    function deleteToDoItem() {
+        if (deleteBtn && deleteBtn.classList.contains('glyphicon-trash')) {
+            liToDelete.remove();
+            deleteItemData();
+            console.log(toDoItems);
+        }
+    }
+
+    function deleteItemData() {
+        return toDoItems.splice(toDoItems.indexOf(liToDelete.textContent), 1);
     }
 });
