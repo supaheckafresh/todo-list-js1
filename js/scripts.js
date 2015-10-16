@@ -1,10 +1,10 @@
 
-var addItem_input = document.getElementById('enterItem');
-var toDoList_ul = document.getElementById('toDoList');
-
 var toDoItems = [];
 
+var addItem_input = document.getElementById('enterItem');
 var addItem_button = document.getElementById('itemSubmit');
+
+var toDoList_ul = document.getElementById('toDoList');
 
 //TODO remove debug console logs
 
