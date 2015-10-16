@@ -106,16 +106,28 @@ toDoList_ul.addEventListener('click', function (evt) {
     }
 
 
-    var button;
+    var button = event.target;
     var todoLi;
 
-    if (buttonClicked() && isTrashBtn(event.target)) {
-        console.log(buttonClicked(), isTrashBtn(event.target));
-        deleteToDoItem();
+    if (buttonClicked()) {
+        if (isEditBtn(button)) {
+            editToDoItem();
+        }
+        else if (isTrashBtn(button)) {
+            deleteToDoItem();
+        }
     }
 
-    if (buttonClicked() && isEditBtn(event.target)) {
-        editToDoItem();
+
+    function deleteToDoItem() {
+        removeItemFromArray();
+        displayToDoItems();
+    }
+
+    function editToDoItem() {
+        if (button && button.classList.contains('glyphicon-edit')) {
+
+        }
     }
 
 
@@ -132,7 +144,6 @@ toDoList_ul.addEventListener('click', function (evt) {
             todoLi = button.parentNode.parentNode;
             clicked = true;
         }
-
         return clicked;
 
         function targetIsTheLittleGlyphicon() {
@@ -142,32 +153,15 @@ toDoList_ul.addEventListener('click', function (evt) {
 
 
     function isTrashBtn(button) {
-        return button.classList.contains('glyphicon-trash')
-            || button.childNodes[0].classList.contains('glyphicon-trash');
-    }
-
-    function deleteToDoItem() {
-        console.log(todoLi.textContent);
-        removeItemFromArray();
-        displayToDoItems();
-        console.log(toDoItems);
+        return button.classList.contains('glyphicon-trash');
     }
 
     function removeItemFromArray() {
         toDoItems.splice(toDoItems.indexOf(todoLi.textContent), 1);
     }
 
-
     function isEditBtn(button) {
         return button.classList.contains('glyphicon-edit');
     }
-
-    function editToDoItem() {
-        if (button && button.classList.contains('glyphicon-edit')) {
-
-        }
-    }
-
-
 
 });
