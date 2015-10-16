@@ -8,7 +8,7 @@ var addItem_button = document.getElementById('itemSubmit');
 
 //TODO remove debug console logs
 
-//TODO add edit, delete, and complete for selected tasks
+//TODO add edit for selected tasks
 
 //TODO also need edit and delete next to each item
 
@@ -106,31 +106,49 @@ toDoList_ul.addEventListener('click', function (evt) {
     }
 
 
-    var deleteBtn;
-    var liToDelete;
-    if (evt.target.type === 'button') {
-        deleteBtn = evt.target.firstChild;
-        liToDelete = evt.target.parentNode;
-    }
-    else if (targetIsTheLittleGlyphicon()) {
-        deleteBtn = evt.target;
-        liToDelete = deleteBtn.parentNode.parentNode;
-    }
-    deleteToDoItem();
+    var button;
+    var todoLi;
 
-    function targetIsTheLittleGlyphicon() {
-        return evt.target.parentElement.type === 'button';
-    }
+    if (buttonClicked() && )
 
     function deleteToDoItem() {
-        if (deleteBtn && deleteBtn.classList.contains('glyphicon-trash')) {
-            liToDelete.remove();
-            deleteItemData();
-            console.log(toDoItems);
+        deleteItemData();
+        displayToDoItems();
+        console.log(toDoItems);
+    }
+
+    function isTrashBtn() {
+        button && button.classList.contains('glyphicon-trash');
+    }
+
+    function editToDoItem() {
+        if (button && button.classList.contains('glyphicon-edit')) {
+
+        }
+    }
+
+    function buttonClicked() {
+        var clicked = false;
+
+        if (evt.target.type === 'button') {
+            button = evt.target.firstChild;
+            todoLi = evt.target.parentNode;
+            return true;
+        }
+        else if (targetIsTheLittleGlyphicon()) {
+            button = evt.target;
+            todoLi = button.parentNode.parentNode;
+            return true;
+        }
+
+        function targetIsTheLittleGlyphicon() {
+            return evt.target.parentElement.type === 'button';
         }
     }
 
     function deleteItemData() {
-        return toDoItems.splice(toDoItems.indexOf(liToDelete.textContent), 1);
+        return toDoItems.splice(toDoItems.indexOf(todoLi.textContent), 1);
     }
+
+
 });
