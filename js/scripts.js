@@ -10,8 +10,6 @@ var addItem_button = document.getElementById('itemSubmit');
 
 //TODO add edit for selected tasks
 
-//TODO also need edit and delete next to each item
-
 //TODO MAYBE - add theme selector?
 
 addItem_button.addEventListener('click', function (evt) {
@@ -19,8 +17,6 @@ addItem_button.addEventListener('click', function (evt) {
         toDoItems.push(itemText_input.value.trim());
 
         evt.preventDefault();
-
-        console.log(toDoItems);
 
         displayToDoItems();
         alert(itemText_input.value + ' has been added to your list!');
@@ -37,6 +33,7 @@ function displayToDoItems() {
         var item = toDoItems[i];
         displayItem(item);
     }
+    console.log(toDoItems);
 }
 
 function displayItem(item) {
@@ -92,17 +89,19 @@ toDoList_ul.addEventListener('click', function (evt) {
         else if (!checkbox.checked) {
             styleIncomplete();
         }
-    }
 
-    function styleComplete() {
-        var liCompleted = li;
-        liCompleted.setAttribute('class', 'list-group-item list-group-item-success col-xs-7 col-xs-offset-1');
-        liCompleted.querySelector('.item-text').style.textDecoration = 'line-through';
-    }
+        function styleComplete() {
+            var liCompleted = li;
+            liCompleted.setAttribute('class',
+                'list-group-item list-group-item-success col-xs-7 col-xs-offset-1');
+            liCompleted.querySelector('.item-text').style.textDecoration = 'line-through';
+        }
 
-    function styleIncomplete() {
-        li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
-        li.querySelector('.item-text').style.textDecoration = 'none';
+        function styleIncomplete() {
+            li.setAttribute('class',
+                'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
+            li.querySelector('.item-text').style.textDecoration = 'none';
+        }
     }
 
 
@@ -118,18 +117,18 @@ toDoList_ul.addEventListener('click', function (evt) {
         }
     }
 
-
     function deleteToDoItem() {
         removeItemFromArray();
         displayToDoItems();
     }
 
-    function editToDoItem() {
-        if (button && button.classList.contains('glyphicon-edit')) {
-
-        }
+    function removeItemFromArray() {
+        toDoItems.splice(toDoItems.indexOf(todoLi.textContent), 1);
     }
 
+    function editToDoItem() {
+        //TODO make this one!
+    }
 
     function buttonClicked() {
         var clicked = false;
@@ -151,13 +150,8 @@ toDoList_ul.addEventListener('click', function (evt) {
         }
     }
 
-
     function isTrashBtn(button) {
         return button.classList.contains('glyphicon-trash');
-    }
-
-    function removeItemFromArray() {
-        toDoItems.splice(toDoItems.indexOf(todoLi.textContent), 1);
     }
 
     function isEditBtn(button) {
