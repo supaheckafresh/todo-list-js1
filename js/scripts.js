@@ -38,9 +38,7 @@ function displayToDoItems() {
 }
 
 function displayItem(item) {
-    var span = document.createElement('span');
-    span.setAttribute('class', 'item-text col-xs-10');
-    span.appendChild(document.createTextNode(item));
+    var span = displayItem.makeSpan(item);
 
     var li = document.createElement('li');
     li.appendChild(displayItem.checkbox());
@@ -57,7 +55,14 @@ function displayItem(item) {
     toDoList_ul.appendChild(div);
 }
 
-displayItem.checkbox = function() {
+displayItem.makeSpan = function (item) {
+    var span = document.createElement('span');
+    span.setAttribute('class', 'item-text col-xs-10');
+    span.appendChild(document.createTextNode(item));
+    return span;
+};
+
+displayItem.checkbox = function () {
     var checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('class', 'big-check col-xs-2');
@@ -110,14 +115,14 @@ toDoList_ul.addEventListener('click', function (evt) {
 
     if (buttonClicked()) {
         if (isEditBtn(button)) {
-            editToDoItem();
+            makeEditable();
         }
         else if (isTrashBtn(button)) {
-            deleteToDoItem();
+            deleteItem();
         }
     }
 
-    function deleteToDoItem() {
+    function deleteItem() {
         removeItemFromArray();
         displayToDoItems();
     }
@@ -126,13 +131,19 @@ toDoList_ul.addEventListener('click', function (evt) {
         toDoItems.splice(toDoItems.indexOf(toDo_div.textContent), 1);
     }
 
-    function editToDoItem() {
-        makeEntryEditable();
+    function makeEditable() {
+
+        convertToTextInput();
         var text = document.getElementsByClassName('edit-text')[0].value;
 
-        restyleEditBtn();
+        styleEditBtn('red', 'lawngreen');
 
-        function makeEntryEditable() {
+        //setTimeout used here to prevent saveEditedItem() from being called on first edit button click.
+        setTimeout(function () {
+            button.classList.add('edit-mode');
+        }, 100);
+
+        function convertToTextInput() {
             var textInput = document.createElement('input');
             textInput.setAttribute('type', 'text');
             textInput.setAttribute('class', 'edit-text input-normal col-xs-10');
@@ -144,11 +155,34 @@ toDoList_ul.addEventListener('click', function (evt) {
             toDo_li.children[1].remove();
             toDo_li.appendChild(textInput);
         }
+    }
 
-        function restyleEditBtn() {
-            button.style.color = 'red';
-            button.parentNode.style.backgroundColor = 'lawngreen';
+    if (buttonClicked()) {
+        if (isEditModeBtn(button)) {
+            console.log('what');
+            var text = $('.edit-text').val();
+            if (text) {
+                saveEditedItem(text);
+            } else {
+                alert('You didn\'t write anything!');
+            }
         }
+
+        function saveEditedItem(text) {
+            var span = displayItem.makeSpan(text);
+
+            var toDo_li = toDo_div.children[0];
+            toDo_li.children[1].remove();
+            toDo_li.appendChild(span);
+
+            button.classList.remove('edit-mode');
+            styleEditBtn('black', 'white');
+        }
+    }
+
+    function styleEditBtn(glyphiconColor, bgColor) {
+        button.style.color = glyphiconColor;
+        button.parentNode.style.backgroundColor = bgColor;
     }
 
 
@@ -177,7 +211,12 @@ toDoList_ul.addEventListener('click', function (evt) {
     }
 
     function isEditBtn(button) {
-        return button.classList.contains('glyphicon-edit');
+        return button.classList.contains('glyphicon-edit')
+            && !button.classList.contains('edit-mode');
+    }
+
+    function isEditModeBtn(button) {
+        return button.classList.contains('edit-mode');
     }
 
 });
