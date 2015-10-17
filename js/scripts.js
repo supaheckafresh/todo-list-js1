@@ -178,6 +178,9 @@ toDoList_ul.addEventListener('click', function (evt) {
         button.parentNode.style.backgroundColor = bgColor;
     }
 
+    // For the moment, edited item can only be saved by clicking button.
+    // hitting enter will not work as I wanted to allow for multiple items to be in edit-mode simultaneously.
+    // TODO Should add this functionality (hitting 'enter') later when edit-mode state can be saved in object.
     if (buttonClicked()) {
         if (isEditModeBtn(button)) {
             var text = button.parentNode.parentNode.childNodes[0].childNodes[1]
