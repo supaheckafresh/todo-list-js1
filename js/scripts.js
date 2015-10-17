@@ -8,9 +8,6 @@ var toDoList_ul = document.getElementById('toDoList');
 
 //TODO remove debug console logs
 
-//TODO add edit for selected tasks
-//TODO make item not editable when marked complete
-
 //TODO MAYBE - add theme selector?
 
 addItem_button.addEventListener('click', function (evt) {
@@ -133,6 +130,7 @@ toDoList_ul.addEventListener('click', function (evt) {
     if (buttonClicked()) {
         if (isEditBtn(button)) {
             makeEditable();
+            toggleCheckbox('disable');
         }
         else if (isTrashBtn(button)) {
             deleteItem();
@@ -181,7 +179,6 @@ toDoList_ul.addEventListener('click', function (evt) {
 
     if (buttonClicked()) {
         if (isEditModeBtn(button)) {
-            console.log('what');
             var text = $('.edit-text').val().trim();
             if (text) {
                 saveEditedItem(text);
@@ -199,6 +196,25 @@ toDoList_ul.addEventListener('click', function (evt) {
 
             button.classList.remove('edit-mode');
             styleEditBtn('black', 'white');
+
+            toggleCheckbox('enable');
+        }
+    }
+
+    function toggleCheckbox(mode) {
+        var checkbox;
+        if (evt.target.classList.contains('glyphicon-edit')) {
+            checkbox = evt.target.parentNode.parentNode.childNodes[0].childNodes[0];
+        } else {
+            checkbox = evt.target.parentNode.childNodes[0].childNodes[0];
+        }
+        if (mode === 'disable') {
+            checkbox.setAttribute('disabled', 'disabled');
+        }
+        if (mode === 'enable') {
+            if (checkbox.hasAttribute('disabled')){
+                checkbox.removeAttribute('disabled');
+            }
         }
     }
 
