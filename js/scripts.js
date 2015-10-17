@@ -29,6 +29,7 @@ addItem_button.addEventListener('click', function (evt) {
 });
 
 function displayToDoItems() {
+
     toDoList_ul.innerHTML = '';
     for (var i = 0; i < toDoItems.length; i++) {
         var item = toDoItems[i];
@@ -90,9 +91,11 @@ toDoList_ul.addEventListener('click', function (evt) {
         var li = checkbox.parentNode;
         if (checkbox.checked) {
             styleComplete();
+            toggleEditBtn('disable');
         }
         else if (!checkbox.checked) {
             styleIncomplete();
+            toggleEditBtn('enable');
         }
 
         function styleComplete() {
@@ -106,6 +109,20 @@ toDoList_ul.addEventListener('click', function (evt) {
             li.setAttribute('class',
                 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
             li.querySelector('.item-text').style.textDecoration = 'none';
+        }
+
+        function toggleEditBtn(mode) {
+            var editBtn = evt.target.parentNode.parentNode.childNodes[1];
+            if (mode === 'disable') {
+                editBtn.setAttribute('disabled', 'disabled');
+                editBtn.childNodes[0].classList.add('disabled');
+            }
+            if (mode === 'enable') {
+                if (editBtn.hasAttribute('disabled')){
+                    editBtn.removeAttribute('disabled');
+                    editBtn.childNodes[0].classList.remove('disabled');
+                }
+            }
         }
     }
 
@@ -157,10 +174,15 @@ toDoList_ul.addEventListener('click', function (evt) {
         }
     }
 
+    function styleEditBtn(glyphiconColor, bgColor) {
+        button.style.color = glyphiconColor;
+        button.parentNode.style.backgroundColor = bgColor;
+    }
+
     if (buttonClicked()) {
         if (isEditModeBtn(button)) {
             console.log('what');
-            var text = $('.edit-text').val();
+            var text = $('.edit-text').val().trim();
             if (text) {
                 saveEditedItem(text);
             } else {
@@ -179,12 +201,6 @@ toDoList_ul.addEventListener('click', function (evt) {
             styleEditBtn('black', 'white');
         }
     }
-
-    function styleEditBtn(glyphiconColor, bgColor) {
-        button.style.color = glyphiconColor;
-        button.parentNode.style.backgroundColor = bgColor;
-    }
-
 
     function buttonClicked() {
         var clicked = false;
@@ -212,11 +228,11 @@ toDoList_ul.addEventListener('click', function (evt) {
 
     function isEditBtn(button) {
         return button.classList.contains('glyphicon-edit')
-            && !button.classList.contains('edit-mode');
+            && !button.classList.contains('edit-mode')
+            && !button.classList.contains('disabled');
     }
 
     function isEditModeBtn(button) {
         return button.classList.contains('edit-mode');
     }
-
 });
