@@ -106,7 +106,7 @@ toDoList_ul.addEventListener('click', function (evt) {
 
 
     var button = event.target;
-    var todoLi;
+    var toDo_div;
 
     if (buttonClicked()) {
         if (isEditBtn(button)) {
@@ -123,11 +123,25 @@ toDoList_ul.addEventListener('click', function (evt) {
     }
 
     function removeItemFromArray() {
-        toDoItems.splice(toDoItems.indexOf(todoLi.textContent), 1);
+        toDoItems.splice(toDoItems.indexOf(toDo_div.textContent), 1);
     }
 
     function editToDoItem() {
         //TODO make this one!
+        makeEntryEditable();
+    }
+
+    function makeEntryEditable() {
+        var textInput = document.createElement('input');
+        textInput.setAttribute('type', 'text');
+        textInput.setAttribute('class', 'edit-text input-normal col-xs-10');
+
+        var itemText = button.parentNode.parentNode.textContent;
+        textInput.setAttribute('value', itemText);
+
+        var toDo_li = toDo_div.children[0];
+        toDo_li.children[1].remove();
+        toDo_li.appendChild(textInput);
     }
 
     function buttonClicked() {
@@ -135,12 +149,12 @@ toDoList_ul.addEventListener('click', function (evt) {
 
         if (evt.target.type === 'button') {
             button = evt.target.firstChild;
-            todoLi = evt.target.parentNode;
+            toDo_div = evt.target.parentNode;
             clicked = true;
         }
         else if (targetIsTheLittleGlyphicon()) {
             button = evt.target;
-            todoLi = button.parentNode.parentNode;
+            toDo_div = button.parentNode.parentNode;
             clicked = true;
         }
         return clicked;
