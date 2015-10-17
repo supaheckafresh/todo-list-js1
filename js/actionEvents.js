@@ -1,6 +1,6 @@
 //TODO add short cheer sound on complete item?
 
-toDoList_ul.addEventListener('click', function (evt) {
+todoList_ul.addEventListener('click', function (evt) {
 
     if (evt.target.type === 'checkbox') {
         var checkbox = evt.target;
@@ -44,7 +44,7 @@ toDoList_ul.addEventListener('click', function (evt) {
 
 
     var button = event.target;
-    var toDo_div;
+    var todo_div;
 
     if (buttonClicked()) {
         if (isEditBtn(button)) {
@@ -58,11 +58,11 @@ toDoList_ul.addEventListener('click', function (evt) {
 
     function deleteItem() {
         removeItemFromArray();
-        displayToDoItems();
+        displayTodoItems();
     }
 
     function removeItemFromArray() {
-        toDoItems.splice(toDoItems.indexOf(toDo_div.textContent), 1);
+        todoItems.splice(todoItems.indexOf(todo_div.textContent), 1);
     }
 
     function makeEditable() {
@@ -85,9 +85,9 @@ toDoList_ul.addEventListener('click', function (evt) {
             var itemText = button.parentNode.parentNode.textContent;
             textInput.setAttribute('value', itemText);
 
-            var toDo_li = toDo_div.children[0];
-            toDo_li.children[1].remove();
-            toDo_li.appendChild(textInput);
+            var todo_li = todo_div.children[0];
+            todo_li.children[1].remove();
+            todo_li.appendChild(textInput);
         }
     }
 
@@ -113,9 +113,9 @@ toDoList_ul.addEventListener('click', function (evt) {
         function saveEditedItem(text) {
             var span = displayItem.makeSpan(text);
 
-            var toDo_li = toDo_div.children[0];
-            toDo_li.children[1].remove();
-            toDo_li.appendChild(span);
+            var todo_li = todo_div.children[0];
+            todo_li.children[1].remove();
+            todo_li.appendChild(span);
 
             button.classList.remove('edit-mode');
             styleEditBtn('black', 'white');
@@ -146,12 +146,12 @@ toDoList_ul.addEventListener('click', function (evt) {
 
         if (evt.target.type === 'button') {
             button = evt.target.firstChild;
-            toDo_div = evt.target.parentNode;
+            todo_div = evt.target.parentNode;
             clicked = true;
         }
         else if (targetIsTheLittleGlyphicon()) {
             button = evt.target;
-            toDo_div = button.parentNode.parentNode;
+            todo_div = button.parentNode.parentNode;
             clicked = true;
         }
         return clicked;

@@ -1,10 +1,10 @@
 
-var toDoItems = [];
+var todoItems = [];
 
 var addItem_input = document.getElementById('enterItem');
 var addItem_button = document.getElementById('itemSubmit');
 
-var toDoList_ul = document.getElementById('toDoList');
+var todoList_ul = document.getElementById('todoList');
 
 //TODO remove debug console logs
 
@@ -13,11 +13,11 @@ var toDoList_ul = document.getElementById('toDoList');
 
 addItem_button.addEventListener('click', function (evt) {
     if (addItem_input.value) {
-        toDoItems.push(addItem_input.value.trim());
+        todoItems.push(addItem_input.value.trim());
 
         evt.preventDefault();
 
-        displayToDoItems();
+        displayTodoItems();
         alert(addItem_input.value + ' has been added to your list!');
 
         addItem_input.value = '';
@@ -26,14 +26,14 @@ addItem_button.addEventListener('click', function (evt) {
     }
 });
 
-function displayToDoItems() {
+function displayTodoItems() {
 
-    toDoList_ul.innerHTML = '';
-    for (var i = 0; i < toDoItems.length; i++) {
-        var item = toDoItems[i];
+    todoList_ul.innerHTML = '';
+    for (var i = 0; i < todoItems.length; i++) {
+        var item = todoItems[i];
         displayItem(item);
     }
-    console.log(toDoItems);
+    console.log(todoItems);
 }
 
 function displayItem(item) {
@@ -51,7 +51,7 @@ function displayItem(item) {
     div.appendChild(displayItem.button('glyphicon glyphicon-edit'));
     div.appendChild(displayItem.button('glyphicon glyphicon-trash'));
 
-    toDoList_ul.appendChild(div);
+    todoList_ul.appendChild(div);
 }
 
 displayItem.makeSpan = function (item) {
