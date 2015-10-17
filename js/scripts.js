@@ -127,22 +127,30 @@ toDoList_ul.addEventListener('click', function (evt) {
     }
 
     function editToDoItem() {
-        //TODO make this one!
         makeEntryEditable();
+        var text = document.getElementsByClassName('edit-text')[0].value;
+
+        restyleEditBtn();
+
+        function makeEntryEditable() {
+            var textInput = document.createElement('input');
+            textInput.setAttribute('type', 'text');
+            textInput.setAttribute('class', 'edit-text input-normal col-xs-10');
+
+            var itemText = button.parentNode.parentNode.textContent;
+            textInput.setAttribute('value', itemText);
+
+            var toDo_li = toDo_div.children[0];
+            toDo_li.children[1].remove();
+            toDo_li.appendChild(textInput);
+        }
+
+        function restyleEditBtn() {
+            button.style.color = 'red';
+            button.parentNode.style.backgroundColor = 'lawngreen';
+        }
     }
 
-    function makeEntryEditable() {
-        var textInput = document.createElement('input');
-        textInput.setAttribute('type', 'text');
-        textInput.setAttribute('class', 'edit-text input-normal col-xs-10');
-
-        var itemText = button.parentNode.parentNode.textContent;
-        textInput.setAttribute('value', itemText);
-
-        var toDo_li = toDo_div.children[0];
-        toDo_li.children[1].remove();
-        toDo_li.appendChild(textInput);
-    }
 
     function buttonClicked() {
         var clicked = false;
