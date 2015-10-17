@@ -1,18 +1,14 @@
 
 var todoItems = [];
-
 var addItem_input = document.getElementById('enterItem');
 var addItem_button = document.getElementById('itemSubmit');
-
 var todoList_ul = document.getElementById('todoList');
-
-//TODO remove debug console logs
 
 //TODO make todoList and todo items objects
 //TODO MAYBE - add theme selector?
 
 addItem_button.addEventListener('click', function (evt) {
-    if (addItem_input.value) {
+    if (inputContainsTodoItem()) {
         todoItems.push(addItem_input.value.trim());
 
         evt.preventDefault();
@@ -23,6 +19,11 @@ addItem_button.addEventListener('click', function (evt) {
         addItem_input.value = '';
     } else {
         evt.preventDefault();
+    }
+
+    function inputContainsTodoItem() {
+        return addItem_input.value
+            && addItem_input.value.trim() !== '';
     }
 });
 
