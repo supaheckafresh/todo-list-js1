@@ -180,7 +180,8 @@ toDoList_ul.addEventListener('click', function (evt) {
 
     if (buttonClicked()) {
         if (isEditModeBtn(button)) {
-            var text = $('.edit-text').val().trim();
+            var text = button.parentNode.parentNode.childNodes[0].childNodes[1]
+                .value.trim();
             if (text) {
                 saveEditedItem(text);
             } else {
