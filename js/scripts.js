@@ -8,6 +8,7 @@ var toDoList_ul = document.getElementById('toDoList');
 
 //TODO remove debug console logs
 
+//TODO make todoList and todo items objects
 //TODO MAYBE - add theme selector?
 
 addItem_button.addEventListener('click', function (evt) {
@@ -97,14 +98,14 @@ toDoList_ul.addEventListener('click', function (evt) {
 
         function styleComplete() {
             var liCompleted = li;
-            liCompleted.setAttribute('class',
-                'list-group-item list-group-item-success col-xs-7 col-xs-offset-1');
+            liCompleted.classList.remove('list-group-item-danger');
+            liCompleted.classList.add('list-group-item-success');
             liCompleted.querySelector('.item-text').style.textDecoration = 'line-through';
         }
 
         function styleIncomplete() {
-            li.setAttribute('class',
-                'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
+            li.classList.remove('list-group-item-success');
+            li.classList.add('list-group-item-danger');
             li.querySelector('.item-text').style.textDecoration = 'none';
         }
 
