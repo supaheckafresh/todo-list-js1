@@ -1,3 +1,31 @@
+
+addItem_button.addEventListener('click', function (evt) {
+    if (inputContainsTodoItem()) {
+        var item = addItem_input.value.trim();
+        todoItems.push(item);
+
+        saveListToLocalStorage(todoItems);
+
+        evt.preventDefault();
+
+        displayTodoItems();
+        alert(addItem_input.value + ' has been added to your list!');
+
+        addItem_input.value = '';
+    } else {
+        evt.preventDefault();
+    }
+
+    function inputContainsTodoItem() {
+        return addItem_input.value
+            && addItem_input.value.trim() !== '';
+    }
+});
+
+function saveListToLocalStorage(items) {
+    localStorage.todoList = JSON.stringify(items);
+}
+
 //TODO add short cheer sound on complete item?
 
 todoList_ul.addEventListener('click', function (evt) {

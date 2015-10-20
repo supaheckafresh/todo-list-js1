@@ -1,5 +1,5 @@
 
-var todoItems = [];
+var todoItems = JSON.parse(localStorage.getItem('todoList'));
 var addItem_input = document.getElementById('enterItem');
 var addItem_button = document.getElementById('itemSubmit');
 var todoList_ul = document.getElementById('todoList');
@@ -7,28 +7,7 @@ var todoList_ul = document.getElementById('todoList');
 //TODO make todoList and todo items objects
 //TODO MAYBE - add theme selector?
 
-addItem_button.addEventListener('click', function (evt) {
-    if (inputContainsTodoItem()) {
-        todoItems.push(addItem_input.value.trim());
-
-        evt.preventDefault();
-
-        displayTodoItems();
-        alert(addItem_input.value + ' has been added to your list!');
-
-        addItem_input.value = '';
-    } else {
-        evt.preventDefault();
-    }
-
-    function inputContainsTodoItem() {
-        return addItem_input.value
-            && addItem_input.value.trim() !== '';
-    }
-});
-
 function displayTodoItems() {
-
     todoList_ul.innerHTML = '';
     for (var i = 0; i < todoItems.length; i++) {
         var item = todoItems[i];
@@ -80,3 +59,5 @@ displayItem.button = function(buttonType) {
     btn.setAttribute('class', 'btn btn-default btn-lg col-xs-1');
     return btn;
 };
+
+displayTodoItems();
