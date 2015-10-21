@@ -23,7 +23,7 @@ addItem_button.addEventListener('click', function (evt) {
 });
 
 function saveListToLocalStorage(items) {
-    localStorage.todoList = JSON.stringify(items);
+    localStorage.setItem('todoList', JSON.stringify(items));
 }
 
 //TODO add short cheer sound on complete item?
@@ -90,7 +90,9 @@ todoList_ul.addEventListener('click', function (evt) {
     }
 
     function removeItemFromArray() {
-        todoItems.splice(todoItems.indexOf(todo_div.textContent), 1);
+        var itemIndex = button.parentNode.parentNode.getAttribute('id');
+        todoItems.splice(itemIndex, 1);
+        saveListToLocalStorage(todoItems);
     }
 
     function makeEditable() {
@@ -112,6 +114,7 @@ todoList_ul.addEventListener('click', function (evt) {
 
             var itemText = button.parentNode.parentNode.textContent;
             textInput.setAttribute('value', itemText);
+            textInput.setAttribute('rel', itemText);
 
             var todo_li = todo_div.children[0];
             todo_li.children[1].remove();
@@ -139,6 +142,10 @@ todoList_ul.addEventListener('click', function (evt) {
         }
 
         function saveEditedItem(text) {
+            var itemIndex = button.parentNode.parentNode.getAttribute('id');
+            todoItems.splice(itemIndex, 1, text);
+            saveListToLocalStorage(todoItems);
+
             var span = displayItem.makeSpan(text);
 
             var todo_li = todo_div.children[0];
