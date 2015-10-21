@@ -1,7 +1,11 @@
 
 addItem_button.addEventListener('click', function (evt) {
     if (inputContainsTodoItem()) {
-        var item = addItem_input.value.trim();
+        var textInput = addItem_input.value.trim();
+        console.log('text input: ' + textInput);
+        var item = new Todo(textInput);
+        console.log(item);
+
         todoItems.push(item);
 
         saveListToLocalStorage(todoItems);
@@ -33,20 +37,25 @@ todoList_ul.addEventListener('click', function (evt) {
     if (evt.target.type === 'checkbox') {
         var checkbox = evt.target;
         var li = checkbox.parentNode;
+        var div = li.parentNode;
+
         if (checkbox.checked) {
+            todoItems[div.getAttribute('id')].completed = true;
+            saveListToLocalStorage(todoItems);
             styleComplete();
             toggleEditBtn('disable');
         }
         else if (!checkbox.checked) {
+            todoItems[div.getAttribute('id')].completed = false;
+            saveListToLocalStorage(todoItems);
             styleIncomplete();
             toggleEditBtn('enable');
         }
 
         function styleComplete() {
-            var liCompleted = li;
-            liCompleted.classList.remove('list-group-item-danger');
-            liCompleted.classList.add('list-group-item-success');
-            liCompleted.querySelector('.item-text').style.textDecoration = 'line-through';
+            li.classList.remove('list-group-item-danger');
+            li.classList.add('list-group-item-success');
+            li.querySelector('.item-text').style.textDecoration = 'line-through';
         }
 
         function styleIncomplete() {
@@ -143,7 +152,10 @@ todoList_ul.addEventListener('click', function (evt) {
 
         function saveEditedItem(text) {
             var itemIndex = button.parentNode.parentNode.getAttribute('id');
-            todoItems.splice(itemIndex, 1, text);
+
+            todoItems[itemIndex].previousItem = todoItems[itemIndex].item;
+            todoItems[itemIndex].item = text;
+
             saveListToLocalStorage(todoItems);
 
             var span = displayItem.makeSpan(text);

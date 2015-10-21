@@ -10,7 +10,8 @@ var todoList_ul = document.getElementById('todoList');
 function displayTodoItems() {
     todoList_ul.innerHTML = '';
     for (var i = 0; i < todoItems.length; i++) {
-        var item = todoItems[i];
+        var item = todoItems[i].item;
+        console.log(item);
         displayItem(item, i);
     }
     console.log(todoItems);
@@ -20,7 +21,7 @@ function displayItem(item, index) {
     var span = displayItem.makeSpan(item);
 
     var li = document.createElement('li');
-    li.appendChild(displayItem.checkbox());
+    li.appendChild(displayItem.checkbox(index));
     li.appendChild(span);
     li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
 
@@ -42,10 +43,13 @@ displayItem.makeSpan = function (item) {
     return span;
 };
 
-displayItem.checkbox = function () {
+displayItem.checkbox = function (index) {
     var checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('class', 'big-check col-xs-2');
+    if (todoItems[index].completed === true) {
+        checkBox.setAttribute('checked', 'true');
+    }
     return checkBox;
 };
 
