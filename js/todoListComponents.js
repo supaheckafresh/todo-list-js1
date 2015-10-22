@@ -16,12 +16,13 @@ function displayTodoItems() {
 }
 
 function displayItem(item, index) {
+    var div = document.createElement('div');
+    var li = document.createElement('li');
     var checkBox = displayItem.checkbox(index);
     var span = displayItem.makeSpan(item);
     var editBtn = displayItem.button('glyphicon glyphicon-edit');
     var deleteBtn = displayItem.button('glyphicon glyphicon-trash');
 
-    var li = document.createElement('li');
     li.appendChild(checkBox);
     li.appendChild(span);
     li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
@@ -37,7 +38,6 @@ function displayItem(item, index) {
         editBtn.childNodes[0].classList.add('disabled');
     }
 
-    var div = document.createElement('div');
     div.setAttribute('class', 'to-do-item');
     div.setAttribute('id', index);
 
@@ -65,12 +65,13 @@ displayItem.checkbox = function (index) {
     return checkBox;
 };
 
-displayItem.button = function(buttonType) {
+displayItem.button = function (buttonType) {
+    var btn = document.createElement('button');
     var span = document.createElement('span');
+
     span.setAttribute('class', buttonType);
     span.setAttribute('aria-hidden', 'true');
 
-    var btn = document.createElement('button');
     btn.appendChild(span);
     btn.setAttribute('type', 'button');
     btn.setAttribute('class', 'btn btn-default btn-lg col-xs-1');
