@@ -16,9 +16,10 @@ function displayTodoItems() {
 }
 
 function displayItem(item, index) {
-    var span = displayItem.makeSpan(item);
     var checkBox = displayItem.checkbox(index);
+    var span = displayItem.makeSpan(item);
     var editBtn = displayItem.button('glyphicon glyphicon-edit');
+    var deleteBtn = displayItem.button('glyphicon glyphicon-trash');
 
     var li = document.createElement('li');
     li.appendChild(checkBox);
@@ -26,6 +27,8 @@ function displayItem(item, index) {
     li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
 
     if (checkBox.checked) {
+        // below is duplicate code from styleComplete() and toggleEditBtn() inside of the ul event listener.
+        // TODO: fix this duplicate code.
         li.classList.remove('list-group-item-danger');
         li.classList.add('list-group-item-success');
         li.querySelector('.item-text').style.textDecoration = 'line-through';
@@ -40,7 +43,7 @@ function displayItem(item, index) {
 
     div.appendChild(li);
     div.appendChild(editBtn);
-    div.appendChild(displayItem.button('glyphicon glyphicon-trash'));
+    div.appendChild(deleteBtn);
 
     todoList_ul.appendChild(div);
 }
