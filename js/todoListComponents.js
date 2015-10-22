@@ -9,6 +9,7 @@ var todoList_ul = document.getElementById('todoList');
 function displayTodoItems() {
     todoList_ul.innerHTML = '';
     for (var i = 0; i < todoItems.length; i++) {
+        todoItems[i].__proto__ = Todo.prototype;
         var item = todoItems[i].item;
         displayItem(item, i);
     }
