@@ -38,7 +38,6 @@ todoList_ul.addEventListener('click', function (evt) {
 
         if (checkbox.checked) {
             todo.complete();
-            console.log(todo);
             saveListToLocalStorage(todoItems);
 
             styleComplete();
