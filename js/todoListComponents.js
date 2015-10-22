@@ -4,7 +4,6 @@ var addItem_input = document.getElementById('enterItem');
 var addItem_button = document.getElementById('itemSubmit');
 var todoList_ul = document.getElementById('todoList');
 
-//TODO fix completed style and disable edit for completed items on page load.
 //TODO MAYBE - add theme selector?
 
 function displayTodoItems() {
