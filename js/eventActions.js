@@ -2,9 +2,7 @@
 addItem_button.addEventListener('click', function (evt) {
     if (inputContainsTodoItem()) {
         var textInput = addItem_input.value.trim();
-        console.log('text input: ' + textInput);
         var item = new Todo(textInput);
-        console.log(item);
 
         todoItems.push(item);
 
@@ -38,15 +36,16 @@ todoList_ul.addEventListener('click', function (evt) {
         var checkbox = evt.target;
         var li = checkbox.parentNode;
         var div = li.parentNode;
+        var todo = todoItems[div.getAttribute('id')];
 
         if (checkbox.checked) {
-            todoItems[div.getAttribute('id')].completed = true;
+            todo.completed = true;
             saveListToLocalStorage(todoItems);
             styleComplete();
             toggleEditBtn('disable');
         }
         else if (!checkbox.checked) {
-            todoItems[div.getAttribute('id')].completed = false;
+            todo.completed = false;
             saveListToLocalStorage(todoItems);
             styleIncomplete();
             toggleEditBtn('enable');

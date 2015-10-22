@@ -18,18 +18,29 @@ function displayTodoItems() {
 
 function displayItem(item, index) {
     var span = displayItem.makeSpan(item);
+    var checkBox = displayItem.checkbox(index);
+    var editBtn = displayItem.button('glyphicon glyphicon-edit');
 
     var li = document.createElement('li');
-    li.appendChild(displayItem.checkbox(index));
+    li.appendChild(checkBox);
     li.appendChild(span);
     li.setAttribute('class', 'list-group-item list-group-item-danger col-xs-7 col-xs-offset-1');
+
+    if (checkBox.checked) {
+        li.classList.remove('list-group-item-danger');
+        li.classList.add('list-group-item-success');
+        li.querySelector('.item-text').style.textDecoration = 'line-through';
+
+        editBtn.setAttribute('disabled', 'disabled');
+        editBtn.childNodes[0].classList.add('disabled');
+    }
 
     var div = document.createElement('div');
     div.setAttribute('class', 'to-do-item');
     div.setAttribute('id', index);
 
     div.appendChild(li);
-    div.appendChild(displayItem.button('glyphicon glyphicon-edit'));
+    div.appendChild(editBtn);
     div.appendChild(displayItem.button('glyphicon glyphicon-trash'));
 
     todoList_ul.appendChild(div);
