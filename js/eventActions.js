@@ -34,53 +34,27 @@ todoList_ul.addEventListener('click', function (evt) {
         var checkbox = evt.target;
         var li = checkbox.parentNode;
         var div = li.parentNode;
+        var editBtn = div.childNodes[1];
         var todo = todoItems[div.getAttribute('id')];
 
         if (checkbox.checked) {
             todo.complete();
             saveListToLocalStorage(todoItems);
 
-            styleComplete();
-            toggleEditBtn('disable');
+            li.styleComplete();
+            editBtn.toggleEnabled('disable');
         }
         else if (!checkbox.checked) {
             todo.completed = false;
             saveListToLocalStorage(todoItems);
-            styleIncomplete();
-            toggleEditBtn('enable');
-        }
-
-        function styleComplete() {
-            li.classList.remove('list-group-item-danger');
-            li.classList.add('list-group-item-success');
-            li.querySelector('.item-text').style.textDecoration = 'line-through';
-        }
-
-        function styleIncomplete() {
-            li.classList.remove('list-group-item-success');
-            li.classList.add('list-group-item-danger');
-            li.querySelector('.item-text').style.textDecoration = 'none';
-        }
-
-        function toggleEditBtn(mode) {
-            var editBtn = evt.target.parentNode.parentNode.childNodes[1];
-            if (mode === 'disable') {
-                editBtn.setAttribute('disabled', 'disabled');
-                editBtn.childNodes[0].classList.add('disabled');
-            }
-            if (mode === 'enable') {
-                if (editBtn.hasAttribute('disabled')){
-                    editBtn.removeAttribute('disabled');
-                    editBtn.childNodes[0].classList.remove('disabled');
-                }
-            }
+            li.styleIncomplete();
+            editBtn.toggleEnabled('enable');
         }
     }
 
 
     var button = event.target;
     var todo_div;
-
     if (buttonClicked()) {
         if (isEditBtn(button)) {
             makeEditable();
