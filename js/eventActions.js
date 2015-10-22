@@ -2,10 +2,8 @@
 addItem_button.addEventListener('click', function (evt) {
     if (inputContainsTodoItem()) {
         var textInput = addItem_input.value.trim();
-        var item = new Todo(textInput);
 
-        todoItems.push(item);
-
+        todoItems.push(new Todo(textInput));
         saveListToLocalStorage(todoItems);
 
         evt.preventDefault();
@@ -39,6 +37,7 @@ todoList_ul.addEventListener('click', function (evt) {
         var todo = todoItems[div.getAttribute('id')];
 
         if (checkbox.checked) {
+            //TODO change this to the prototype method. Not sure why I am getting error with this?
             todo.completed = true;
             saveListToLocalStorage(todoItems);
             styleComplete();
